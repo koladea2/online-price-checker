@@ -1,24 +1,27 @@
 import requests
-import randint 
+import random
+from random import randint 
 
-def get_json()
+def get_json():
     url = "https://opentdb.com/api.php?amount=50"
     response2 = requests.get(url)
     file = response2.json()
     return(file)
 
 
-def game():
+def introduction():
     print("Hello, Welcome to Trivia!")
     print("----------------------------------------")
     print("GAME INSTRUCTIONS")
     print("Use the number pad to choose options.")
     start_game = input("To start the game, type START : ")
-  
+    
+    return start_game
+    
 
 def game_options():
     Final_decision = ""
-    General_category = ["All", "Entertainment: ", "Science & Nature: ", "Mythology", "History", "Celebrities", "Politics", "Art", "Animals", "General Knowledge"]
+    General_category = {'0' : "All", '1' : "Entertainment: ", '2' : "Science & Nature: ", '3' : "Mythology", '4' : "History", '5' : "Celebrities", '6' : "Politics", '7' : "Art", '8' : "Animals", '9' : "General Knowledge"}
     print("0 : Any category")
     print("1 : Entertainment")
     print("2 : Science")
@@ -31,19 +34,30 @@ def game_options():
     print("9 : General Knowledge")
     
     users_category = input("Choose a category: ")
-    return users_category
+    
+    #if user selected 0
+    if users_category == 0:
+        random_number = randint(1,9)
+        users_category = random_number
+        
+    #if user selected 1 or 2
+    elif users_category == 1 or users_category == 2:
+        sub_category = category_options(users_category)
+        Final_decision = General_category[users_category] + sub_category #Look in the dictionary and return the option selected with the subcategory
+      
+    #if selection was any number > 2  
+    else:
+        Final_decision = General_category[users_category]    #Look in the dictionary and return the option selected
+    
+    return Final_decision
   
   
 def category_options(users_category):
-    #Final_decision = General_category[users_category]
-    #return = Final_decision
-    #start new function?
-    #process for Any category (rand_num from 1-9)
-    if users_category == 0:
-        random_number = range (1, (randint * 9))
-        users_category = random_number
+    second_decision = ""
+    Second_category1 = {'0' : "Books", '1' : "Film", '2' : "Music", '3' : "Television", '4' : "Video games", '5' : "Board games", '6' : "Cartoons & animations", '7' : "Anime & Manga", '8' : "Comics", '9' : "Musicals & Theaters"}
+    Second_category2 = {'0' : "Computers", '1' : "Mathematics", '2' : "Gadgets"}
       
-    elif users_category == 1:
+    if users_category == 1:
         print("Select a category: ")
         print("---------------------------------------")
         print("0 : Books")
@@ -57,74 +71,66 @@ def category_options(users_category):
         print("8 : Comics")
         print("9 : Musicals & Theaters")
 
-      entertainment_choice = input("Choose an option : ")
+        entertainment_choice = input("Choose an option : ")
+        second_decision = Second_category1[entertainment_choice]
+        return second_decision
+      
       
     elif users_category == 2:
+        
         print("Select a category: ")
         print("----------------------------------------")
         print("0 : Computers")
         print("1 : Mathematics")
         print("2 : Gadgets")
         
-#     elif users_category == 3:
-#     elif users_category == 4:
-#     elif users_category == 5:
-#     elif users_category == 6:
-#     elif users_category == 7:
-#     elif users_category == 8:
-#     elif users_category == 9:
+        entertainment_choice = input("Choose an option : ")
+        second_decision = Second_category2[entertainment_choice]
+        return second_decision
     
+    #re-locate this statement 
     else:
         print("Incorrect input! Please choose from the above options")
         
-  Final_decision = General_category[users_category]
       
 
 def game_difficulty():
+    third_decision = ""
+    Difficulties = {'0' : "Easy", '1' : "Medium", '2' : "Hard"}
+    
     print("Select a difficulty: ")
     print("---------------------------------------")
     print("0 : Easy")
     print("1 : Medium")
     print("2 : Hard")
     
-    users_difficulty = input("Choose a difficulty")
-    return(users_difficulty)
-      
-
+    users_difficulty = input("Choose a difficulty: ")
+    third_decision = Difficulties[users_difficulty]
+    return third_decision
 
 
 def game_type():
+    fourth_decision = ""
+    Types = {'0' : "boolean", '1' : "multiple"}
+    
     print("Select a game type: ")
     print("---------------------------------------")
     print("0 : True or False")
     print("1 : Multiple choice")
-    users_type = input("Choose a game type")
     
-    #convert the user input of option3 into the same language of the API
-    if users_type == "true or false":
-        users_type = "boolean"
-    else:
-        users_type = "multiple"
+    users_type = input("Choose a game type: ")
+    fourth_decision = Types[users_type]
+    return fourth_decision
+    
         
     return users_type
-  
-#print all posible category
-#Chosee the category(user_input)
-#option1 = input()
-#Chosse the dificulty(user_input)
-#print the 3 difficultyes
-#option2 = input()
-#choose the game type(user_input)
-#print true or false & multiple choice
-#option3 = input()
-
 
 
 #passing all the info from the API into a dictionary
-def Api_to_dictionary():
+def Api_to_dictionary(link):
     Dic = {}
     i = 0
-    for item in file['results']:
+    for item in link['results']:
         Dic[i] = item["category"], item["type"], item["difficulty"], item["question"], item["correct_answer"], item["incorrect_answers"]
         #print(Dic[i])
         i = i + 1
@@ -133,12 +139,12 @@ def Api_to_dictionary():
 
 
 #printing only the question that fit to the user specifications
-def print_questions():
+def print_questions(Dic, option1, option2, option3):
     total_points = 0
     good_points = 0
     i = 0  
-    for items in Dic[i]:
-        if item["category"] == option1 && item["type"] == option2 && item["difficulty"] == option3:
+    for item in Dic[i]:
+        if item["category"] == option1 and item["type"] == option2 and item["difficulty"] == option3:
             total_points = total_points + 1
             print(item["question"])
             print(item["correct_answer"] + ", " + item["incorrect_answers"])
@@ -149,15 +155,35 @@ def print_questions():
                 good_points = good_points + 1
             else:
                 print("Keep trying!")
+        i = i + 1
                 
     return total_points, good_points
         
 
     
-def main()
-    game()
-
-    if start_game.lower() == "start":
-         game_options()
+def main():
+    #FirstChoice = introduction()
+  
+    link = get_json()
+    dictionary = Api_to_dictionary(link)
     
+    category_choice = game_options()
+    difficulty_choice = game_difficulty()
+    type_choice = game_type()
+    
+    print(dictionary)
+    print("------------------------------------------------------------------------------------------------")
+    print(category_choice) #0 fails, 1 ans 2 fail to send to other function 
+    print(difficulty_choice) #good
+    print(type_choice) #good
+    #everything work up to here
+    
+    total_score, good_points = print_questions(dictionary, category_choice, difficulty_choice, type_choice)
+    
+    print(total_score)
+    print(good_points)
+    
+    
+
+main()
 
