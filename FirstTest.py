@@ -20,8 +20,11 @@ def introduction():
     
 
 def game_options():
-    Final_decision = ""
-    General_category = {'0' : "All", '1' : "Entertainment: ", '2' : "Science & Nature: ", '3' : "Mythology", '4' : "History", '5' : "Celebrities", '6' : "Politics", '7' : "Art", '8' : "Animals", '9' : "General Knowledge"}
+    category_decision = ""
+    #General_category = {'0' : "All", '1' : "Entertainment: ", '2' : "Science & Nature: ", '3' : "Mythology", '4' : "History", '5' : "Celebrities", '6' : "Politics", '7' : "Art", '8' : "Animals", '9' : "General Knowledge"}
+    #might be getting key errors because of the keys as strings
+    General_category = {0 : "All", 1 : "Entertainment: ", 2 : "Science & Nature: ", 3 : "Mythology", 4 : "History", 5 : "Celebrities", 6 : "Politics", 7 : "Art", 8 : "Animals", 9 : "General Knowledge"}
+    
     print("0 : Any category")
     print("1 : Entertainment")
     print("2 : Science")
@@ -37,26 +40,31 @@ def game_options():
     
     #if user selected 0
     if users_category == 0:
-        random_number = randint(1,9)
+        random_number = random.randint(1,9)
         users_category = random_number
+        #this needs to return the final decision so we should set that as the output
+        #category_decision = General_category[users_category]
         
     #if user selected 1 or 2
-    elif users_category == 1 or users_category == 2:
+    if users_category == 1 or users_category == 2:
         sub_category = category_options(users_category)
-        Final_decision = General_category[users_category] + sub_category #Look in the dictionary and return the option selected with the subcategory
+        category_decision = General_category[users_category] + sub_category #Look in the dictionary and return the option selected with the subcategory
       
     #if selection was any number > 2  
     else:
-        Final_decision = General_category[users_category]    #Look in the dictionary and return the option selected
+        category_decision = General_category[users_category]    #Look in the dictionary and return the option selected
     
-    return Final_decision
+    print("category_decision function")
+    print(category_decision)
+    return category_decision
   
   
 def category_options(users_category):
     second_decision = ""
-    Second_category1 = {'0' : "Books", '1' : "Film", '2' : "Music", '3' : "Television", '4' : "Video games", '5' : "Board games", '6' : "Cartoons & animations", '7' : "Anime & Manga", '8' : "Comics", '9' : "Musicals & Theaters"}
-    Second_category2 = {'0' : "Computers", '1' : "Mathematics", '2' : "Gadgets"}
-      
+    #Second_category1 = {'0' : "Books", '1' : "Film", '2' : "Music", '3' : "Television", '4' : "Video games", '5' : "Board games", '6' : "Cartoons & animations", '7' : "Anime & Manga", '8' : "Comics", '9' : "Musicals & Theaters"}
+    #Second_category2 = {'0' : "Computers", '1' : "Mathematics", '2' : "Gadgets"}
+    Second_category1 = {0 : "Books", 1 : "Film", 2 : "Music", 3 : "Television", 4 : "Video games", 5 : "Board games", 6 : "Cartoons & animations", 7 : "Anime & Manga", 8 : "Comics", 9 : "Musicals & Theaters"}
+    Second_category2 = {0 : "Computers", 1 : "Mathematics", 2 : "Gadgets"}
     if users_category == 1:
         print("Select a category: ")
         print("---------------------------------------")
@@ -96,7 +104,8 @@ def category_options(users_category):
 
 def game_difficulty():
     third_decision = ""
-    Difficulties = {'0' : "Easy", '1' : "Medium", '2' : "Hard"}
+    #difficulties = {'0' : "easy", '1' : "medium", '2' : "hard"}
+    difficulties = {0 : "easy", 1 : "medium", 2 : "hard"}
     
     print("Select a difficulty: ")
     print("---------------------------------------")
@@ -105,13 +114,16 @@ def game_difficulty():
     print("2 : Hard")
     
     users_difficulty = input("Choose a difficulty: ")
-    third_decision = Difficulties[users_difficulty]
+    third_decision = difficulties[users_difficulty]
+    print("game_difficulty function")
+    print(third_decision)
     return third_decision
 
 
 def game_type():
     fourth_decision = ""
-    Types = {'0' : "boolean", '1' : "multiple"}
+    #Types = {'0' : "boolean", '1' : "multiple"}
+    Types = {0 : "boolean", 1 : "multiple"}
     
     print("Select a game type: ")
     print("---------------------------------------")
@@ -120,10 +132,11 @@ def game_type():
     
     users_type = input("Choose a game type: ")
     fourth_decision = Types[users_type]
+    print("game_type function")
+    print(fourth_decision)
     return fourth_decision
     
-        
-    return users_type
+
 
 
 #passing all the info from the API into a dictionary
@@ -131,8 +144,17 @@ def Api_to_dictionary(link):
     Dic = {}
     i = 0
     for item in link['results']:
-        Dic[i] = item["category"], item["type"], item["difficulty"], item["question"], item["correct_answer"], item["incorrect_answers"]
-        #print(Dic[i])
+        sub_dict = {}
+        sub_dict["category"] = item["category"]
+        sub_dict["type"] = item["type"]
+        sub_dict["difficulty"] = item["difficulty"]
+        sub_dict["question"] = item["question"]
+        sub_dict["correct_answer"] = item["correct_answer"]
+        sub_dict["incorrect_answers"] = item["incorrect_answers"]
+        Dic[i] = sub_dict
+        #Dic[i] = item["category"], item["type"], item["difficulty"], item["question"], item["correct_answer"], item["incorrect_answers"]
+        #print(item["category"])
+        #print(item)
         i = i + 1
 
     return Dic
@@ -140,30 +162,37 @@ def Api_to_dictionary(link):
 
 #printing only the question that fit to the user specifications
 def print_questions(Dic, option1, option2, option3):
+    #print(option1)
+    #print(option2)
+    #print(option3)
+    #print(Dic)
     total_points = 0
     good_points = 0
     i = 0  
-    for item in Dic[i]:
-        if item["category"] == option1 and item["type"] == option2 and item["difficulty"] == option3:
-            total_points = total_points + 1
-            print(item["question"])
-            print(item["correct_answer"] + ", " + item["incorrect_answers"])
-            print("And the answer is: " )
-            answer = input()
-            if answer == item["correct_answer"]:
-                print("Nice")
-                good_points = good_points + 1
-            else:
-                print("Keep trying!")
-        i = i + 1
-                
-    return total_points, good_points
+    for item in Dic.values():
+      #print(item)
+      #print(item["category"])
+      #break
         
+      if item["category"] == option1 and item["type"] == option2 and item["difficulty"] == option3:
+          total_points = total_points + 1
+          print(item["question"])
+          print(item["correct_answer"] + ", " + item["incorrect_answers"])
+          print("And the answer is: " )
+          answer = input()
+          if answer == item["correct_answer"]:
+              print("Nice")
+              good_points = good_points + 1
+          else:
+              print("Keep trying!")
+          #i = i + 1
+                
+    return total_points, good_points 
 
-    
+
 def main():
     #FirstChoice = introduction()
-  
+    
     link = get_json()
     dictionary = Api_to_dictionary(link)
     
@@ -171,19 +200,21 @@ def main():
     difficulty_choice = game_difficulty()
     type_choice = game_type()
     
-    print(dictionary)
+    #print("This is the dictionary!")
+    #print(dictionary[0]) #good
     print("------------------------------------------------------------------------------------------------")
-    print(category_choice) #0 fails, 1 ans 2 fail to send to other function 
-    print(difficulty_choice) #good
-    print(type_choice) #good
+    print("This is the category: ", category_choice) #0 fails, 1 ans 2 fail to send to other function 
+    print("This is the difficulty: ", difficulty_choice) #good
+    print("This is the type: ", type_choice) #good
     #everything work up to here
     
     total_score, good_points = print_questions(dictionary, category_choice, difficulty_choice, type_choice)
     
-    print(total_score)
-    print(good_points)
+    #print(total_score)
+    #print(good_points)
     
     
 
 main()
+
 
