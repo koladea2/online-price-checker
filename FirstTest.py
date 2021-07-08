@@ -96,11 +96,15 @@ def print_questions(Dic):
     for item in Dic.values():
       print("------------------------------------------------------------------")
       print(item["question"])
-      print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
-#       if str(item(["type"])) == str(multiple):
-#           print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
-#       else:
-#           print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0] + "]"))
+      print("\n")
+      check = item["type"]
+      print(check)
+      #print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
+      if check == "multiple":
+          print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
+      else:
+          print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0] + "]"))
+          
       answer = str(input("And the answer is: "))
       print(answer)
       print(item["correct_answer"])
