@@ -2,8 +2,6 @@ import requests
 import random
 from random import randint 
 
-
-
 def get_json(amount, category, difficulty):
     url = "https://opentdb.com/api.php?amount=" + str(amount) + "&category=" + str(category) + "&difficulty=" + str(difficulty)
     response2 = requests.get(url)
@@ -47,6 +45,7 @@ def number_of_questions(identification):
     print(resume)
     return(resume)
 
+  
 def game_difficulty():
     third_decision = ""
     difficulties = {0 : "easy", 1 : "medium", 2 : "hard"}
@@ -58,7 +57,13 @@ def game_difficulty():
     print("2 : Hard")
     print("\n")    
   
-    users_difficulty = input("Choose a difficulty: ")
+    users_difficulty = int(input("Choose a difficulty: "))
+    if users_difficulty < 0 or users_difficulty > 2:
+        while users_difficulty < 0 or users_difficulty > 2:
+            users_difficulty = int(input("please enter another difficulty: "))
+            print(users_difficulty)
+            if users_difficulty > 0 and users_difficulty < 2:
+                break
     third_decision = difficulties[int(users_difficulty)]
     #print("game_difficulty function")
     #print(third_decision)
@@ -107,10 +112,10 @@ def print_questions(Dic):
        
       print(item["correct_answer"])
       # For multiple choice, enter the answer in single quotes
-      answer = input("And the answer is: ")
+      answer = (input("And your answer is: ")).lower()
       #print("It works!")
 
-      if answer == item["correct_answer"]:
+      if answer == (item["correct_answer"]).lower():
           print("######################################################")
           print("Nice! Good Job")
           good_points = good_points + 1
@@ -137,7 +142,7 @@ def main():
     
     good_points = print_questions(dictionary)
     
-    print("Good points: ", good_points)
+    print("Total points: ", good_points)
     
     
 
