@@ -59,7 +59,7 @@ def game_difficulty():
     print("\n")    
   
     users_difficulty = input("Choose a difficulty: ")
-    third_decision = difficulties[users_difficulty]
+    third_decision = difficulties[int(users_difficulty)]
     #print("game_difficulty function")
     #print(third_decision)
     return third_decision
@@ -82,17 +82,17 @@ def Api_to_dictionary(link):
         i = i +1
     return Dic
   
-def input_test(wrong_choices):
-    new_list = []
-    for i in wrong_choices:
-        new_list.append(i)
-    return new_list
+# def input_test(wrong_choices):
+#     new_list = []
+#     for i in wrong_choices:
+#         new_list.append(i)
+#     return new_list
 
 #printing only the question that fit to the user specifications
 def print_questions(Dic):
     good_points = 0
     print("This is the dictionary")
-    print Dic
+    print(Dic)
     for item in Dic.values():
       print("------------------------------------------------------------------")
       print(item["question"])
@@ -104,10 +104,12 @@ def print_questions(Dic):
           print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
       else:
           print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0] + "]"))
-          
-      answer = str(input("And the answer is: "))
-      print(answer)
+       
       print(item["correct_answer"])
+      # For multiple choice, enter the answer in single quotes
+      answer = input("And the answer is: ")
+      #print("It works!")
+
       if answer == item["correct_answer"]:
           print("######################################################")
           print("Nice! Good Job")
@@ -120,11 +122,6 @@ def print_questions(Dic):
                 
     return good_points 
 
-# def input_test(wrong_choices):
-#     new_list = []
-#     for i in wrong_choices:
-#         new_list.append(i)
-#     print(new_list)
 
 def main():
     #FirstChoice = introduction()
@@ -140,8 +137,7 @@ def main():
     
     good_points = print_questions(dictionary)
     
-    #print(total_score)
-    #print(good_points)
+    print("Good points: ", good_points)
     
     
 
