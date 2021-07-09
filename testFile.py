@@ -1,7 +1,6 @@
 import unittest
 
-from FirstTest import game_difficulty, Api_to_dictionary,
-from FirstTest import print_questions, display_ids, get_json
+from FirstTest import game_difficulty, Api_to_dictionary, print_questions, display_ids, get_json
 
 
 class TestFileName(unittest.TestCase):

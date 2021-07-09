@@ -1,6 +1,7 @@
 import requests
 import random
 from random import randint
+import matplotlib.pyplot as plt
 
 
 def get_json(amount, category, difficulty):
@@ -131,12 +132,25 @@ def print_questions(Dic):
         else:
             print("\n")
             print("|------------|")
-            print("|Keep trying!|")
+            print("|Incorrect! Please Keep trying!|")
             print("|------------|")
 
         print("\n")
 
     return good_points
+
+  
+def graph(good_points):
+    bad_points = 10 - good_points
+    # Pie chart, where the slices will be ordered and plotted counter-clockwise:
+    answers = 'Right', 'Wrong'
+    sizes = [good_points, bad_points]
+    myexplode = [0.2, 0] # only "explode" the 2nd slice
+
+    fig = plt.figure(figsize =(10, 7))
+    plt.pie(sizes, labels = answers, explode = myexplode, shadow = True)
+
+    plt.savefig('results.png')
 
 
 def main():
@@ -154,12 +168,13 @@ def main():
             good_points = print_questions(dictionary)
 
             print("Total points: ", good_points)
+            graph(good_points)
             print("\n")
             print("To play again, press 0.")
             print("To quit, press 1.")
             firstChoice = input("Option: ")
 
-    print("The end!")
+    print("The end! Thank you for playing TRIVIA")
 
 
 main()
