@@ -128,7 +128,7 @@ def print_questions(Dic):
             print("Keep trying!")
 
         print("\n")
-                
+
     return good_points
 
 
@@ -142,7 +142,7 @@ def main():
     link = get_json(num_questions, category_choice, difficulty_choice)
     dictionary = Api_to_dictionary(link)
 
-    print("--------------------------------------------------------------------------------")
+    print("-------------------------------------------------")
     
     good_points = print_questions(dictionary)
     
