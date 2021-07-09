@@ -4,7 +4,8 @@ from random import randint
 
 
 def get_json(amount, category, difficulty):
-    url = "https://opentdb.com/api.php?amount=" + str(amount) + "&category=" + str(category) + "&difficulty=" + str(difficulty)
+    url = "https://opentdb.com/api.php?amount=" + str(amount) + 
+    "&category=" + str(category) + "&difficulty=" + str(difficulty)
     response2 = requests.get(url)
     file = response2.json()
     return(file)
