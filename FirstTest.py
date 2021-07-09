@@ -4,8 +4,8 @@ from random import randint
 
 
 def get_json(amount, category, difficulty):
-    url = "https://opentdb.com/api.php?amount=" + 
-            str(amount) + "&category=" + str(category) + 
+    url = "https://opentdb.com/api.php?amount=" +
+            str(amount) + "&category=" + str(category) +
             "&difficulty=" + str(difficulty)
     response2 = requests.get(url)
     file = response2.json()
@@ -36,13 +36,13 @@ def display_ids():
                   29: "Entertainment: Comics", 30: "Science: Gadgets",
                   31: "Entertainment: Japanese Anime & Manga",
                   32: "Entertainment: Cartoon & Animations"
-                 }
-    
+                  }
+
     for (key, value) in dictionary.items():
-        print(key , value)
+        print(key, value)
         
     print("\n")
-    category_choice = input("Choose a category using the number options above: ")
+    category_choice = input("Choose a category using the options above: ")
     return(category_choice)
 
   
@@ -84,7 +84,7 @@ def Api_to_dictionary(link):
         sub_dict["incorrect_answers"] = item["incorrect_answers"]
         Dic[i] = sub_dict
         # Dic[i] = item["category"], item["type"], item["difficulty"], item["question"], item["correct_answer"], item["incorrect_answers"]
-        i = i +1
+        i = i + 1
     return Dic
 
 
@@ -99,7 +99,7 @@ def print_questions(Dic):
         print("\n")
         check = item["type"]
         print(check)
-        #print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
+        # print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
         if check == "multiple":
             print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
         else:
@@ -108,7 +108,7 @@ def print_questions(Dic):
         print(item["correct_answer"])
         # For multiple choice, enter the answer in single quotes
         answer = (input("And your answer is: ")).lower()
-        #print("It works!")
+        # print("It works!")
 
         if answer == (item["correct_answer"]).lower():
             print("######################################################")
@@ -124,7 +124,7 @@ def print_questions(Dic):
 
 
 def main():
-    #FirstChoice = introduction()
+    # FirstChoice = introduction()
     num_questions = "10"
     category_choice = display_ids()
     print("\n")
