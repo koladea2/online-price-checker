@@ -15,8 +15,9 @@ class TestFileName(unittest.TestCase):
     def test_userinput_greaterthan2(self):
         self.assertNotEqual(game_difficulty(), "3")
 
-#       def test_printquestions(self):
-#           self.assertEqual(print_questions({}), 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10)
+# def test_printquestions(self):
+# self.assertEqual(print_questions({}),
+# 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10)
 
 #       def test_printquestions_string(self):
 #           self.assertNotEqual(print_questions(Dic), "")
