@@ -5,8 +5,8 @@ from random import randint
 
 def get_json(amount, category, difficulty):
     url = "https://opentdb.com/api.php?amount=" +
-            str(amount) + "&category=" + str(category) +
-            "&difficulty=" + str(difficulty)
+          str(amount) + "&category=" + str(category) +
+          "&difficulty=" + str(difficulty)
     response2 = requests.get(url)
     file = response2.json()
     return(file)
@@ -113,7 +113,7 @@ def print_questions(Dic):
         else:
             print("[" + str(item["correct_answer"]) + ", " +
                   str(item["incorrect_answers"][0] + "]"))
-       
+
         print(item["correct_answer"])
         # For multiple choice, enter the answer in single quotes
         answer = (input("And your answer is: ")).lower()
@@ -142,7 +142,7 @@ def main():
     link = get_json(num_questions, category_choice, difficulty_choice)
     dictionary = Api_to_dictionary(link)
 
-    print("------------------------------------------------------------------------------------------------")
+    print("-----------------------------------------------------------------------------------------")
     
     good_points = print_questions(dictionary)
     
