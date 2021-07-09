@@ -11,8 +11,9 @@ def get_json(amount, category, difficulty):
 
 
 def introduction():
+    print("-------------------------")
     print("Hello, Welcome to TRIVIA!")
-    print("----------------------------------------")
+    print("-------------------------")
     print("GAME INSTRUCTIONS")
     print("Use the number pad to choose options.")
     print("For new game, press 0.")
@@ -23,6 +24,10 @@ def introduction():
 
 
 def display_ids():
+    print("\n")
+    print("Categories: ")
+    print("---------------------------------------")
+    
     dictionary = {9: "General Knowledge", 10: "Entertainment: Books",
                   11: "Entertainment: Film", 12: "Entertainment: Music",
                   13: "Entertainment: Musicals & Theatres",
@@ -42,7 +47,7 @@ def display_ids():
         print(key, value)
 
     print("\n")
-    category_choice = input("Choose a category using the options above: ")
+    category_choice = input("Choose a category using the ID above: ")
     return(category_choice)
 
 
@@ -50,7 +55,7 @@ def game_difficulty():
     third_decision = ""
     difficulties = {0: "easy", 1: "medium", 2: "hard"}
 
-    print("Select a difficulty: ")
+    print("Difficulties: ")
     print("---------------------------------------")
     print("0 : Easy")
     print("1 : Medium")
@@ -93,18 +98,11 @@ def Api_to_dictionary(link):
 # printing only the question that fit to the user specifications
 def print_questions(Dic):
     good_points = 0
-    print("This is the dictionary")
-    print(Dic)
     for item in Dic.values():
         print("----------------------------------------------------------")
         print(item["question"])
         print("\n")
         check = item["type"]
-        print(check)
-        # print("[" + str(item["correct_answer"]) + ", " +
-        #  str(item["incorrect_answers"][0]) + ", " +
-        #   str(item["incorrect_answers"][1]) + ", " +
-        #    str(item["incorrect_answers"][2] + "]"))
         if check == "multiple":
             print("[" + str(item["correct_answer"]) + ", " +
                   str(item["incorrect_answers"][0]) + ", " +
@@ -114,18 +112,19 @@ def print_questions(Dic):
             print("[" + str(item["correct_answer"]) + ", " +
                   str(item["incorrect_answers"][0] + "]"))
 
-        print(item["correct_answer"])
-        # For multiple choice, enter the answer in single quotes
         answer = (input("And your answer is: ")).lower()
-        # print("It works!")
 
         if answer == (item["correct_answer"]).lower():
-            print("######################################################")
-            print("Nice! Good Job")
+            print("\n")
+            print("|--------------|")
+            print("|Nice! Good Job|")
+            print("|--------------|")
             good_points = good_points + 1
         else:
-            print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-            print("Keep trying!")
+            print("\n")
+            print("|------------|")
+            print("|Keep trying!|")
+            print("|------------|")
 
         print("\n")
 
@@ -144,11 +143,10 @@ def main():
             link = get_json(num_questions, category_choice, difficulty_choice)
             dictionary = Api_to_dictionary(link)
 
-            print("-------------------------------------------------")
-
             good_points = print_questions(dictionary)
 
             print("Total points: ", good_points)
+            print("\n")
             print("To play again, press 0.")
             print("To quit, press 1.")
             firstChoice = input("Option: ")
