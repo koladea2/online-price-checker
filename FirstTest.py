@@ -1,12 +1,12 @@
 import requests
 import random
-from random import randint 
+from random import randint
 
 
 def get_json(amount, category, difficulty):
     url = "https://opentdb.com/api.php?amount=" + 
-           str(amount) + "&category=" + str(category) + 
-           "&difficulty=" + str(difficulty)
+            str(amount) + "&category=" + str(category) + 
+            "&difficulty=" + str(difficulty)
     response2 = requests.get(url)
     file = response2.json()
     return(file)
@@ -23,14 +23,19 @@ def introduction():
 
 
 def display_ids():
-    dictionary = {9: "General Knowledge", 10 : "Entertainment: Books", 11 : "Entertainment: Film", 
-                  12 : "Entertainment: Music", 13 : "Entertainment: Musicals & Theatres", 14 : "Entertainment: Television",
-                  15 : "Entertainment: Video Games", 16 : "Entertainment: Board Games",
-                  17 : "Science & Nature", 18 : "Science: Computers", 19 : "Science: Mathematics", 
-                  20 : "Mythology", 21 : "Sports", 22: "Geography", 23 : "History", 24 : "Politics",
-                  25 : "Art", 26 : "Celebrities", 27 : "Animals", 28: "Vehicles", 29 : "Entertainment: Comics",
-                  30 : "Science: Gadgets", 31 : "Entertainment: Japanese Anime & Manga", 
-                  32 : "Entertainment: Cartoon & Animations" 
+    dictionary = {9: "General Knowledge", 10: "Entertainment: Books",
+                  11: "Entertainment: Film", 12: "Entertainment: Music",
+                  13: "Entertainment: Musicals & Theatres",
+                  14: "Entertainment: Television",
+                  15: "Entertainment: Video Games",
+                  16: "Entertainment: Board Games",
+                  17: "Science & Nature", 18: "Science: Computers",
+                  19: "Science: Mathematics", 20: "Mythology", 21: "Sports",
+                  22: "Geography", 23: "History", 24: "Politics", 25: "Art",
+                  26: "Celebrities", 27: "Animals", 28: "Vehicles",
+                  29: "Entertainment: Comics", 30: "Science: Gadgets",
+                  31: "Entertainment: Japanese Anime & Manga",
+                  32: "Entertainment: Cartoon & Animations"
                  }
     
     for (key, value) in dictionary.items():
@@ -78,17 +83,12 @@ def Api_to_dictionary(link):
         sub_dict["correct_answer"] = item["correct_answer"]
         sub_dict["incorrect_answers"] = item["incorrect_answers"]
         Dic[i] = sub_dict
-        #Dic[i] = item["category"], item["type"], item["difficulty"], item["question"], item["correct_answer"], item["incorrect_answers"]
+        # Dic[i] = item["category"], item["type"], item["difficulty"], item["question"], item["correct_answer"], item["incorrect_answers"]
         i = i +1
     return Dic
-  
-# def input_test(wrong_choices):
-#     new_list = []
-#     for i in wrong_choices:
-#         new_list.append(i)
-#     return new_list
 
-#printing only the question that fit to the user specifications
+
+# printing only the question that fit to the user specifications
 def print_questions(Dic):
     good_points = 0
     print("This is the dictionary")
@@ -118,7 +118,7 @@ def print_questions(Dic):
             print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
             print("Keep trying!")
       
-      print("\n")
+        print("\n")
                 
     return good_points 
 
