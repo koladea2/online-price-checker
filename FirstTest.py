@@ -49,7 +49,7 @@ def display_ids():
 def game_difficulty():
     third_decision = ""
     difficulties = {0: "easy", 1: "medium", 2: "hard"}
-    
+
     print("Select a difficulty: ")
     print("---------------------------------------")
     print("0 : Easy")
@@ -101,11 +101,18 @@ def print_questions(Dic):
         print("\n")
         check = item["type"]
         print(check)
-        # print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
+        # print("[" + str(item["correct_answer"]) + ", " +
+        #  str(item["incorrect_answers"][0]) + ", " +
+        #   str(item["incorrect_answers"][1]) + ", " +
+        #    str(item["incorrect_answers"][2] + "]"))
         if check == "multiple":
-            print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
+            print("[" + str(item["correct_answer"]) + ", " +
+                  str(item["incorrect_answers"][0]) + ", " +
+                  str(item["incorrect_answers"][1]) + ", " +
+                  str(item["incorrect_answers"][2] + "]"))
         else:
-            print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0] + "]"))
+            print("[" + str(item["correct_answer"]) + ", " +
+                  str(item["incorrect_answers"][0] + "]"))
        
         print(item["correct_answer"])
         # For multiple choice, enter the answer in single quotes
