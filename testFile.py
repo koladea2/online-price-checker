@@ -16,11 +16,12 @@ class TestFileName(unittest.TestCase):
         self.assertNotEqual(game_difficulty(), "3")
 
 # def test_printquestions(self):
-# self.assertEqual(print_questions({}),
-# 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10)
+  # self.assertEqual(print_questions({}),
+  # 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10)
 
-#       def test_printquestions_string(self):
-#           self.assertNotEqual(print_questions(Dic), "")
+# def test_printquestions_string(self):
+#   self.assertNotEqual(print_questions(Dic), "")
+
     def test_displayChoice_isLess(self):
         self.assertLess(display_ids(), "33")
 
