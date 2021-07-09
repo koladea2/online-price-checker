@@ -13,7 +13,7 @@ class TestFileName(unittest.TestCase):
 
     def test_userinput_negative(self):
         self.assertNotEqual(game_difficulty(), "-1")
- 
+
 
     def test_userinput_greaterthan2(self):
         self.assertNotEqual(game_difficulty(), "3")
@@ -50,7 +50,7 @@ class TestFileName(unittest.TestCase):
 
     def test_introduction_notInt(self):
         self.assertNotEqual(introduction(), 9)
-        
+
 
 if __name__ == '__main__':
     unittest.main()
