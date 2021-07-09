@@ -49,7 +49,13 @@ def display_ids():
         print(key, value)
 
     print("\n")
-    category_choice = input("Choose a category using the ID above: ")
+    category_choice = int(input("Choose a category using the ID above: "))
+    if category_choice < 9 or category_choice > 32:
+        while category_choice < 9 or category_choice > 32:
+            category_choice = int(input("please enter a valid category: "))
+            print(category_choice)
+            if category_choice > 9 and category_choice < 32:
+                break
     return(category_choice)
 
 
@@ -67,7 +73,7 @@ def game_difficulty():
     users_difficulty = int(input("Choose a difficulty: "))
     if users_difficulty < 0 or users_difficulty > 2:
         while users_difficulty < 0 or users_difficulty > 2:
-            users_difficulty = int(input("please enter another difficulty: "))
+            users_difficulty = int(input("please enter a valid difficulty: "))
             print(users_difficulty)
             if users_difficulty > 0 and users_difficulty < 2:
                 break
