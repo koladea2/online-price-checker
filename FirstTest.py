@@ -45,7 +45,7 @@ def display_ids():
     category_choice = input("Choose a category using the options above: ")
     return(category_choice)
 
-  
+
 def game_difficulty():
     third_decision = ""
     difficulties = {0: "easy", 1: "medium", 2: "hard"}
@@ -96,7 +96,7 @@ def print_questions(Dic):
     print("This is the dictionary")
     print(Dic)
     for item in Dic.values():
-        print("------------------------------------------------------------------")
+        print("----------------------------------------------------------")
         print(item["question"])
         print("\n")
         check = item["type"]
@@ -122,7 +122,7 @@ def print_questions(Dic):
       
         print("\n")
                 
-    return good_points 
+    return good_points
 
 
 def main():
