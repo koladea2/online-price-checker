@@ -2,8 +2,11 @@ import requests
 import random
 from random import randint 
 
+
 def get_json(amount, category, difficulty):
-    url = "https://opentdb.com/api.php?amount=" + str(amount) + "&category=" + str(category) + "&difficulty=" + str(difficulty)
+    url = "https://opentdb.com/api.php?amount=" + 
+           str(amount) + "&category=" + str(category) + 
+           "&difficulty=" + str(difficulty)
     response2 = requests.get(url)
     file = response2.json()
     return(file)
@@ -15,12 +18,12 @@ def introduction():
     print("GAME INSTRUCTIONS")
     print("Use the number pad to choose options.")
     start_game = input("To start the game, type START : ")
-    
+
     return start_game
 
 
 def display_ids():
-    dictionary = { 9 : "General Knowledge", 10 : "Entertainment: Books", 11 : "Entertainment: Film", 
+    dictionary = {9: "General Knowledge", 10 : "Entertainment: Books", 11 : "Entertainment: Film", 
                   12 : "Entertainment: Music", 13 : "Entertainment: Musicals & Theatres", 14 : "Entertainment: Television",
                   15 : "Entertainment: Video Games", 16 : "Entertainment: Board Games",
                   17 : "Science & Nature", 18 : "Science: Computers", 19 : "Science: Mathematics", 
@@ -36,14 +39,6 @@ def display_ids():
     print("\n")
     category_choice = input("Choose a category using the number options above: ")
     return(category_choice)
-
-        
-def number_of_questions(identification):
-    url = "https://opentdb.com/api_count.php?category=" + identification
-    amount = requests.get(url)
-    resume = amount.json()
-    print(resume)
-    return(resume)
 
   
 def game_difficulty():
@@ -65,12 +60,12 @@ def game_difficulty():
             if users_difficulty > 0 and users_difficulty < 2:
                 break
     third_decision = difficulties[int(users_difficulty)]
-    #print("game_difficulty function")
-    #print(third_decision)
+    # print("game_difficulty function")
+    # print(third_decision)
     return third_decision
 
 
-#passing all the info from the API into a dictionary
+# passing all the info from the API into a dictionary
 def Api_to_dictionary(link):
     Dic = {}
     i = 0
@@ -99,29 +94,29 @@ def print_questions(Dic):
     print("This is the dictionary")
     print(Dic)
     for item in Dic.values():
-      print("------------------------------------------------------------------")
-      print(item["question"])
-      print("\n")
-      check = item["type"]
-      print(check)
-      #print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
-      if check == "multiple":
-          print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
-      else:
-          print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0] + "]"))
+        print("------------------------------------------------------------------")
+        print(item["question"])
+        print("\n")
+        check = item["type"]
+        print(check)
+        #print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
+        if check == "multiple":
+            print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0]) + ", " + str(item["incorrect_answers"][1]) + ", " + str(item["incorrect_answers"][2] + "]"))
+        else:
+            print("[" + str(item["correct_answer"]) + ", " + str(item["incorrect_answers"][0] + "]"))
        
-      print(item["correct_answer"])
-      # For multiple choice, enter the answer in single quotes
-      answer = (input("And your answer is: ")).lower()
-      #print("It works!")
+        print(item["correct_answer"])
+        # For multiple choice, enter the answer in single quotes
+        answer = (input("And your answer is: ")).lower()
+        #print("It works!")
 
-      if answer == (item["correct_answer"]).lower():
-          print("######################################################")
-          print("Nice! Good Job")
-          good_points = good_points + 1
-      else:
-          print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-          print("Keep trying!")
+        if answer == (item["correct_answer"]).lower():
+            print("######################################################")
+            print("Nice! Good Job")
+            good_points = good_points + 1
+        else:
+            print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+            print("Keep trying!")
       
       print("\n")
                 
@@ -143,9 +138,6 @@ def main():
     good_points = print_questions(dictionary)
     
     print("Total points: ", good_points)
-    
-    
+ 
 
 main()
-
-
