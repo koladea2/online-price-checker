@@ -4,9 +4,7 @@ from random import randint
 
 
 def get_json(amount, category, difficulty):
-    url = "https://opentdb.com/api.php?amount=" +
-        str(amount) + "&category=" + str(category) +
-        "&difficulty=" + str(difficulty)
+    url = "https://opentdb.com/api.php?amount=" + str(amount) + "&category=" + str(category) + "&difficulty=" + str(difficulty)
     response2 = requests.get(url)
     file = response2.json()
     return(file)
@@ -143,10 +141,10 @@ def main():
     dictionary = Api_to_dictionary(link)
 
     print("-------------------------------------------------")
-    
+
     good_points = print_questions(dictionary)
-    
+
     print("Total points: ", good_points)
- 
+
 
 main()
