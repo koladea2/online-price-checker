@@ -40,7 +40,7 @@ def display_ids():
 
     for (key, value) in dictionary.items():
         print(key, value)
-        
+
     print("\n")
     category_choice = input("Choose a category using the options above: ")
     return(category_choice)
@@ -48,15 +48,15 @@ def display_ids():
   
 def game_difficulty():
     third_decision = ""
-    difficulties = {0 : "easy", 1 : "medium", 2 : "hard"}
+    difficulties = {0: "easy", 1: "medium", 2: "hard"}
     
     print("Select a difficulty: ")
     print("---------------------------------------")
     print("0 : Easy")
     print("1 : Medium")
     print("2 : Hard")
-    print("\n")    
-  
+    print("\n")
+
     users_difficulty = int(input("Choose a difficulty: "))
     if users_difficulty < 0 or users_difficulty > 2:
         while users_difficulty < 0 or users_difficulty > 2:
@@ -83,7 +83,9 @@ def Api_to_dictionary(link):
         sub_dict["correct_answer"] = item["correct_answer"]
         sub_dict["incorrect_answers"] = item["incorrect_answers"]
         Dic[i] = sub_dict
-        # Dic[i] = item["category"], item["type"], item["difficulty"], item["question"], item["correct_answer"], item["incorrect_answers"]
+        # Dic[i] = item["category"], item["type"],
+        # item["difficulty"], item["question"], item["correct_answer"],
+        # item["incorrect_answers"]
         i = i + 1
     return Dic
 
