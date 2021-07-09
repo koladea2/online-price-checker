@@ -152,9 +152,8 @@ def main():
             print("To play again, press 0.")
             print("To quit, press 1.")
             firstChoice = input("Option: ")
-      
+ 
     print("The end!")
     
-
 
 main()
