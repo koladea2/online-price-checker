@@ -4,8 +4,7 @@ from random import randint
 
 
 def get_json(amount, category, difficulty):
-    url = "https://opentdb.com/api.php?amount=" + str(amount) +
-    "&category=" + str(category) + "&difficulty=" + str(difficulty)
+    url = "https://opentdb.com/api.php?amount=" + str(amount) + "&category=" + str(category) + "&difficulty=" + str(difficulty)
     response2 = requests.get(url)
     file = response2.json()
     return(file)
@@ -16,7 +15,9 @@ def introduction():
     print("----------------------------------------")
     print("GAME INSTRUCTIONS")
     print("Use the number pad to choose options.")
-    start_game = input("To start the game, type START : ")
+    print("For new game, press 0.")
+    print("To quit, press 1.")
+    start_game = input("Option: ")
 
     return start_game
 
@@ -132,20 +133,28 @@ def print_questions(Dic):
 
 
 def main():
-    # FirstChoice = introduction()
-    num_questions = "10"
-    category_choice = display_ids()
-    print("\n")
-    difficulty_choice = game_difficulty()
-    print("\n")
-    link = get_json(num_questions, category_choice, difficulty_choice)
-    dictionary = Api_to_dictionary(link)
+    firstChoice = introduction()
+    if firstChoice == "0":
+        while firstChoice == "0":
+            num_questions = "10"
+            category_choice = display_ids()
+            print("\n")
+            difficulty_choice = game_difficulty()
+            print("\n")
+            link = get_json(num_questions, category_choice, difficulty_choice)
+            dictionary = Api_to_dictionary(link)
 
-    print("-------------------------------------------------")
+            print("-------------------------------------------------")
 
-    good_points = print_questions(dictionary)
+            good_points = print_questions(dictionary)
 
-    print("Total points: ", good_points)
+            print("Total points: ", good_points)
+            print("To play again, press 0.")
+            print("To quit, press 1.")
+            firstChoice = input("Option: ")
+      
+    print("The end!")
+    
 
 
 main()
