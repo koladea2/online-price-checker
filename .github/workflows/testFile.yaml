@@ -13,13 +13,10 @@ jobs:
           python-version: 3.6
       
       - name: Install python
-        run: python3 -m pip3 install --upgrade pip pytest
+        run: python -m pip install --upgrade pip pytest
    
       - name: Install requests module
-        run: python3 -m pip3 install requests
-        
-      - name: Install random
-        run: python3 -m pip3 install random  
+        run: python -m pip install requests  
 
       - name: Test with unittest
         run: |
